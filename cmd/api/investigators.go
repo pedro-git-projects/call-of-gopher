@@ -32,8 +32,6 @@ func (app *application) createInvestigatorsHandler(w http.ResponseWriter, r *htt
 	birthplace := input.Birthplace
 	occupation := input.Occupation
 
-	fmt.Println(age, name, birthplace, residence, occupation)
-
 	investigator := data.CreateInvestigator(&i, name, age, birthplace, residence, occupation)
 
 	headers := make(http.Header)
