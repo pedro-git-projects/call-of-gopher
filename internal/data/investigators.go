@@ -3,6 +3,7 @@ package data
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/pedro-git-projects/call-of-gopher/internal/data/validator"
 )
@@ -382,9 +383,10 @@ func ValidateInvestigator(v *validator.Validator, investigator *Investigator) {
 	v.Check(investigator.Name != "", "name", "the name field must be provided")
 	v.Check(len(investigator.Name) <= 500, "name", "the name field must not be greater than 500 bytes")
 
-	v.Check(investigator.Age != 0, "age", "must be provided")
-	v.Check(investigator.Age >= 0, "age", "invalid age, please enter in the range 1-99")
-	v.Check(investigator.Age <= 99, "age", "invalid age, please enter in the range 1-99")
+	v.Check(validator.Matches(strconv.Itoa(investigator.Age), validator.AgeRX), "age", "age must be in the closed 1-99 range")
+	//	v.Check(investigator.Age != 0, "age", "must be provided")
+	//  v.Check(investigator.Age >= 0, "age", "invalid age, please enter in the range 1-99")
+	//  v.Check(investigator.Age <= 99, "age", "invalid age, please enter in the range 1-99")
 
 	v.Check(len(investigator.Residence) <= 500, "residence", "the residence field must not be greater than 500 bytes")
 	v.Check(len(investigator.Birthplace) <= 500, "birthplace", "the birthplace field must not be greater than 500 bytes")

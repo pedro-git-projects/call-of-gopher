@@ -53,5 +53,6 @@ func Unique(values []string) bool {
 	for _, value := range values {
 		uniqueValues[value] = true
 	}
+
 	return len(values) == len(uniqueValues)
 }
