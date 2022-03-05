@@ -17,6 +17,12 @@ It follows the rules for the 7nth edition of Chaosium's Call of Cthullu RPG.
 
 ---
 
+# Makefile
+
+You can start the sever by using the included Makefile, at the moment it only starts the server and prints help info, but as the application grows, so will its functionality.
+
+---
+
 # Dependencies
 
 ## httprouter
