@@ -3,6 +3,8 @@ package data
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/pedro-git-projects/call-of-gopher/internal/data/validator"
 )
 
 type Investigator struct {
@@ -374,4 +376,18 @@ func CreateInvestigator(i *Investigator, name string, age int, birth string, res
 
 func (i *Investigator) WriteHandler(w http.ResponseWriter, r *http.Request) {
 	i.WriteInvetigatorWeb(w)
+}
+
+func ValidateInvestigator(v *validator.Validator, investigator *Investigator) {
+	v.Check(investigator.Name != "", "name", "the name field must be provided")
+	v.Check(len(investigator.Name) <= 500, "name", "the name field must not be greater than 500 bytes")
+
+	v.Check(investigator.Age != 0, "age", "must be provided")
+	v.Check(investigator.Age >= 0, "age", "invalid age, please enter in the range 1-99")
+	v.Check(investigator.Age <= 99, "age", "invalid age, please enter in the range 1-99")
+
+	v.Check(len(investigator.Residence) <= 500, "residence", "the residence field must not be greater than 500 bytes")
+	v.Check(len(investigator.Birthplace) <= 500, "birthplace", "the birthplace field must not be greater than 500 bytes")
+	v.Check(len(investigator.Occupation) <= 500, "occupation", "the occupation field must not be greater than 500 bytes")
+
 }
