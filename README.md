@@ -12,8 +12,9 @@ It follows the rules for the 7nth edition of Chaosium's Call of Cthullu RPG.
 
 | Method | URL Pattern         | Action                     |
 |--------|---------------------|----------------------------|
+| GET    | /v1/healthcheck     | Displays availability and system info      |
 | POST   | /v1/investigator    | Creates a new investigator |
-| GET    | /v1/investigator/ID | Displays investigator      |
+| GET    | /v1/investigator/id | Displays investigator      |
 
 ---
 
