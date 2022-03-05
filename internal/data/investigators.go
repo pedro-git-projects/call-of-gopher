@@ -25,6 +25,7 @@ type Investigator struct {
 	Luck        int    `json:"luck"`
 	Mp          int    `json:"mp"`
 	Db          int    `json:"db"`
+	Build       int    `json:"build"`
 	Hp          int    `json:"hp"`
 	San         int    `json:"san"`
 	Mv          int    `json:"mv"`
@@ -303,6 +304,41 @@ func (i *Investigator) AccountForAgeModifiers() {
 	}
 }
 
+func (i *Investigator) SetDamageBonusAndBuild() {
+	db := i.Str + i.Siz
+	d4 := Dice{NumberOfSides: D4}
+	d6 := Dice{NumberOfSides: D6}
+	switch db >= 2 {
+	case db <= 64:
+		i.Db = -2
+		i.Build = -2
+	case db >= 65 && db <= 84:
+		i.Db = -1
+		i.Build = -1
+	case db >= 85 && db <= 124:
+		i.Db = 0
+		i.Build = 0
+	case db >= 125 && db <= 164:
+		i.Db = d4.Roll()
+		i.Build = 1
+	case db >= 165 && db <= 204:
+		i.Db = d6.Roll()
+		i.Build = 2
+	case db >= 205 && db <= 284:
+		i.Db = 2 * d6.Roll()
+		i.Build = 3
+	case db >= 285 && db <= 364:
+		i.Db = 3 * d6.Roll()
+		i.Build = 4
+	case db >= 365 && db <= 444:
+		i.Db = 4 * d6.Roll()
+		i.Build = 5
+	case db >= 445:
+		i.Db = 5 * d6.Roll()
+		i.Build = 6
+	}
+}
+
 func PrintInvestigator(i Investigator) {
 	fmt.Printf("Your name is %s\n", i.Name)
 	fmt.Printf("Your age is %d\n", i.Age)
@@ -350,6 +386,7 @@ func (i Investigator) WriteInvetigatorWeb(w http.ResponseWriter) {
 	fmt.Fprintf(w, "Your luck is %d\n", i.Luck)
 	fmt.Fprintf(w, "Your magic points are %d\n", i.Mp)
 	fmt.Fprintf(w, "Your damage bonus is %d\n", i.Db)
+	fmt.Fprintf(w, "Your build is %d\n", i.Build)
 	fmt.Fprintf(w, "Your hit points are %d\n", i.Hp)
 	fmt.Fprintf(w, "Your sanity is %d\n", i.San)
 	fmt.Fprintf(w, "Your move rate is %d\n", i.Mv)
@@ -371,6 +408,7 @@ func CreateInvestigator(i *Investigator, name string, age int, birth string, res
 	i.SetResidence(residence)
 	i.SetOccupation(occupation)
 	i.AccountForAgeModifiers()
+	i.SetDamageBonusAndBuild()
 	i.SetDescription()
 	return i
 }
