@@ -9,27 +9,27 @@ import (
 )
 
 type Investigator struct {
-	Name        string `json:"name"`
-	Age         int    `json:"age"`
-	Residence   string `json:"residence"`
-	Birthplace  string `json:"birthplace"`
-	Occupation  string `json:"occupation"`
-	Str         int    `json:"str"`
-	Con         int    `json:"con"`
-	Pow         int    `json:"pow"`
-	Dex         int    `json:"dex"`
-	App         int    `json:"app"`
-	Siz         int    `json:"siz"`
-	Int         int    `json:"int"`
-	Edu         int    `json:"edu"`
-	Luck        int    `json:"luck"`
-	Mp          int    `json:"mp"`
-	Db          int    `json:"db"`
-	Build       int    `json:"build"`
-	Hp          int    `json:"hp"`
-	San         int    `json:"san"`
-	Mv          int    `json:"mv"`
-	Description Description
+	Name        string      `json:"name"`
+	Age         int         `json:"age"`
+	Residence   string      `json:"residence"`
+	Birthplace  string      `json:"birthplace"`
+	Occupation  string      `json:"occupation"`
+	Str         int         `json:"str"`
+	Con         int         `json:"con"`
+	Pow         int         `json:"pow"`
+	Dex         int         `json:"dex"`
+	App         int         `json:"app"`
+	Siz         int         `json:"siz"`
+	Int         int         `json:"int"`
+	Edu         int         `json:"edu"`
+	Luck        int         `json:"luck"`
+	Mp          int         `json:"mp"`
+	Db          int         `json:"db"`
+	Build       int         `json:"build"`
+	Hp          int         `json:"hp"`
+	San         int         `json:"san"`
+	Mv          int         `json:"mv"`
+	Description Description `json:"description"`
 }
 
 func (i *Investigator) DetermineCharacteristics() {
