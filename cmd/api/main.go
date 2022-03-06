@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/rs/cors"
 )
 
 const version = "1.0.0"
@@ -33,9 +35,12 @@ func main() {
 		logger: logger,
 	}
 
+	// configuring cors
+	handler := cors.AllowAll().Handler(app.routes())
+
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", cfg.port),
-		Handler:      app.routes(),
+		Handler:      handler,
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
