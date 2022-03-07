@@ -11,6 +11,8 @@
 	</section>
 	<div class="container">
 		<Introduction />
+		<section class="section">
+		<section/>
 		<Form/>
 	</div>
 	<Footer/>
