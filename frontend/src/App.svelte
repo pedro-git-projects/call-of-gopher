@@ -18,10 +18,22 @@
 			})
 		})
 		
-		const json = await res.json()
-		result = JSON.stringify(json)
-		investigator = json	
+		const investigator = await res.json()
+		result = JSON.stringify(investigator)
+
+		if(res.ok) {
+			return investigator
+		} else {
+			throw new Error(investigator)
+		}
 	}
+
+		let promise = doPost()
+
+		function handleClick() {
+			promise = doPost() 
+		}
+
 </script>
 
 <main>
@@ -30,17 +42,20 @@
 	<input bind:value={residence} />
 	<input bind:value={birthplace} />
 	<input bind:value={occupation} />
-	<button type="button" on:click={doPost}>
-	Post it.
+	<button type="button" on:click={handleClick}>
+		Create Investigator
 	</button>
 	<p>
 		Result:
 	</p>
-	<pre>
-		{result}
-	</pre>
-	<p>
-	</p>
+
+{#await promise}
+	<p>...waiting</p>
+{:then investigator}
+	<p>The number is {investigator.investigator.str}</p>
+{:catch error}
+	<p style="color: red">{error.message}</p>
+{/await}
 </main>
 
 <style>
