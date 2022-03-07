@@ -4,7 +4,6 @@
 	let residence = 'Boston'
 	let birthplace = 'New York'
 	let occupation = 'Archeologist'
-	let result = null
 	
 	async function doPost () {
 		const res = await fetch('http://localhost:4000/v1/investigator', {
