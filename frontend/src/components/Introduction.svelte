@@ -1,4 +1,4 @@
-  <h1 class="title">Welcome to Go of Cuthullu</h1>
+  <h1 class="title">Welcome to Call of Gopher</h1>
   <p>A simple website to automatically generate characters for the 7nth edition of the Call of Cthullu RPG. All calculations are done according to chaosium's 7th edition Call of Cthullu Keeper Handbook.  
   </p>
   

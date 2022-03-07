@@ -30,6 +30,7 @@
 		function handleClick() {
 			promise = doPost() 
 		}
+
 </script>
 
 <div class="field">
@@ -70,10 +71,42 @@
 	 <button on:click={handleClick} class="button is-link">Generate</button>
  </div>
 
+ <section class="section">
+
+ </section>
 
 {#await promise}
 	<p>...waiting</p>
 {:then investigator}
+
+<div class="table-container">
+  <table class="table is-striped is-fullwidth">
+	<tbody>
+		<tr>Name: {investigator.investigator.name}</tr>  
+		<tr>Age: {investigator.investigator.age}</tr>  
+		<tr>Age: {investigator.investigator.age}</tr>
+		<tr>Residence: {investigator.investigator.residence}</tr>
+		<tr>Birthplace: {investigator.investigator.birthplace}</tr>
+		<tr>Occupation: {investigator.investigator.occupation}</tr>
+		<tr>Strenght: {investigator.investigator.str}</tr>
+		<tr>Constitution: {investigator.investigator.con}</tr>
+		<tr>Power: {investigator.investigator.pow}</tr>
+		<tr>Dexterity: {investigator.investigator.dex}</tr>
+		<tr>Appearance: {investigator.investigator.app}</tr>
+		<tr>Size: {investigator.investigator.siz}</tr>
+		<tr>Intelligence: {investigator.investigator.int}</tr>
+		<tr>Education: {investigator.investigator.edu}</tr>
+		<tr>Luck: {investigator.investigator.luck}</tr>
+		<tr>MP: {investigator.investigator.mp}</tr>
+		<tr>Damage Bonus: {investigator.investigator.db}</tr>
+		<tr>Build: {investigator.investigator.build}</tr>
+		<tr>HP: {investigator.investigator.hp}</tr>
+		<tr>Sanity: {investigator.investigator.san}</tr>
+		<tr>Move Rate: {investigator.investigator.mv}</tr>
+		</tbody>
+ </table>
+</div>
+
 	<p>
 		Name: {investigator.investigator.name}
 		Age: {investigator.investigator.age}
