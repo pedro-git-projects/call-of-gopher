@@ -1,9 +1,9 @@
 <script>
-	let name = 'Pedro'
-	let age = 24
-	let residence = 'Boston'
-	let birthplace = 'New York'
-	let occupation = 'Archeologist'
+	let name = ''
+	let age = null
+	let residence = ''
+	let birthplace = ''
+	let occupation = ''
 	
 	async function doPost () {
 		const res = await fetch('http://localhost:4000/v1/investigator', {
@@ -31,17 +31,45 @@
 			promise = doPost() 
 		}
 </script>
-	<input bind:value={name} />
-	<input bind:value={age} />
-	<input bind:value={residence} />
-	<input bind:value={birthplace} />
-	<input bind:value={occupation} />
-	<button type="button" on:click={handleClick}>
-		Create Investigator
-	</button>
-	<p>
-		Result:
-	</p>
+
+<div class="field">
+  <label class="label">Name</label>
+  <div class="control">
+	  <input bind:value={name} class="input" type="text" placeholder="Investigator's name ie: Dexter Ward">
+  </div>
+</div> 
+
+<div class="field">
+  <label class="label">Age</label>
+  <div class="control">
+    <input bind:value={age} class="input" type="number" placeholder="Investigator's age ie: 31">
+  </div>
+</div> 
+
+<div class="field">
+  <label class="label">Residence</label>
+  <div class="control">
+	  <input bind:value={residence} class="input" type="text" placeholder="Investigator's residence ie: New York">
+  </div>
+</div> 
+<div class="field">
+  <label class="label">Birthplace</label>
+  <div class="control">
+	  <input bind:value={birthplace} class="input" type="text" placeholder="Investigator's birthplace ie: Newport">
+  </div>
+</div> 
+<div class="field">
+
+  <label class="label">Occupation</label>
+  <div class="control">
+	  <input on:click={handleClick} bind:value={occupation} class="input" type="text" placeholder="Investigator's occupation ie: Archeologist">
+  </div>
+</div> 
+
+ <div class="control">
+	 <button on:click={handleClick} class="button is-link">Generate</button>
+ </div>
+
 
 {#await promise}
 	<p>...waiting</p>
