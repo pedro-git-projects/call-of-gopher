@@ -27,26 +27,39 @@
 
 		let promise = doPost()
 
-		function handleClick() {
+		export function handleClick() {
 			promise = doPost() 
 		}
 </script>
-	<input bind:value={name} />
-	<input bind:value={age} />
-	<input bind:value={residence} />
-	<input bind:value={birthplace} />
-	<input bind:value={occupation} />
-	<button type="button" on:click={handleClick}>
-		Create Investigator
-	</button>
-	<p>
-		Result:
-	</p>
+
+<form>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+	<input bind:value="{name}" type="text" class="form-control" id="name" aria-describedby="name">
+  </div>
+ <div class="mb-3">
+    <label for="age" class="form-label">Age</label>
+	<input bind:value="{age}" type="number" class="form-control" id="age" aria-describedby="age">
+  </div>
+   <div class="mb-3">
+    <label for="residence" class="form-label">Residence</label>
+	<input bind:value="{residence}" type="text" class="form-control" id="residence" aria-describedby="residence">
+  </div>
+   <div class="mb-3">
+    <label for="birthplace" class="form-label">Birthplace</label>
+	<input bind:value="{birthplace}" type="text" class="form-control" id="birthplace" aria-describedby="birthplace">
+  </div>
+ <div class="mb-3">
+    <label for="occupation" class="form-label">Occupation</label>
+	<input bind:value="{occupation}" type="text" class="form-control" id="occupation" aria-describedby="occupation">
+  </div>
+  <button href="#Hidden" on:click="{handleClick}" type="button" class="btn btn-primary" data-toggle="collapse">Create</button>
+</form>
 
 {#await promise}
 	<p>...waiting</p>
 {:then investigator}
-	<p>
+	<div id="Hidden" class="collapse">
 		Name: {investigator.investigator.name}
 		Age: {investigator.investigator.age}
 		Residence: {investigator.investigator.residence}
@@ -67,8 +80,7 @@
 		HP: {investigator.investigator.hp}
 		Sanity: {investigator.investigator.san}
 		Move Rate: {investigator.investigator.mv}
-	</p>
-	<p>
+
 		{investigator.investigator.description.str_description}
 		{investigator.investigator.description.app_description}
 		{investigator.investigator.description.con_description}
@@ -77,7 +89,7 @@
 		{investigator.investigator.description.pow_description}
 		{investigator.investigator.description.edu_description}
 		{investigator.investigator.description.dex_description}
-	</p>
+	</div>
 {:catch error}
 	<p style="color: red">{error.message}</p>
 {/await}
