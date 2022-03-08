@@ -1,11 +1,12 @@
 <script>
+	import Hidden from './Hidden.svelte'
 	let name = ''
 	let age = null
 	let residence = ''
 	let birthplace = ''
 	let occupation = ''
 	
-	async function doPost () {
+	export async function doPost () {
 		const res = await fetch('http://localhost:4000/v1/investigator', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -27,10 +28,6 @@
 
 		let promise = doPost()
 
-		function handleClick() {
-			promise = doPost() 
-		}
-
 </script>
 
 <div class="field">
@@ -43,7 +40,7 @@
 <div class="field">
   <label class="label">Age</label>
   <div class="control">
-    <input bind:value={age} class="input" type="number" placeholder="Investigator's age ie: 31">
+	  <input bind:value={age} class="input" type="number" placeholder="Investigator's age ie: 31">
   </div>
 </div> 
 
@@ -63,13 +60,16 @@
 
   <label class="label">Occupation</label>
   <div class="control">
-	  <input on:click={handleClick} bind:value={occupation} class="input" type="text" placeholder="Investigator's occupation ie: Archeologist">
+	  <input bind:value={occupation} class="input" type="text" placeholder="Investigator's occupation ie: Archeologist">
   </div>
 </div> 
 
  <div class="control">
 	 <button on:click={handleClick} class="button is-link">Generate</button>
+ 	<button on:click={child.show} class="button">Show</button>
  </div>
+
+
 
  <section class="section">
 
@@ -78,6 +78,8 @@
 {#await promise}
 	<p>...waiting</p>
 {:then investigator}
+ 
+<Hidden bind:this={child} on:show={e => child.shown = e.detail}>
 
 <div class="table-container">
   <table class="table is-striped is-fullwidth">
@@ -107,7 +109,8 @@
  </table>
 </div>
 
-	<p>
+
+
 		Name: {investigator.investigator.name}
 		Age: {investigator.investigator.age}
 		Residence: {investigator.investigator.residence}
@@ -128,8 +131,8 @@
 		HP: {investigator.investigator.hp}
 		Sanity: {investigator.investigator.san}
 		Move Rate: {investigator.investigator.mv}
-	</p>
-	<p>
+
+	<div>
 		{investigator.investigator.description.str_description}
 		{investigator.investigator.description.app_description}
 		{investigator.investigator.description.con_description}
@@ -138,8 +141,7 @@
 		{investigator.investigator.description.pow_description}
 		{investigator.investigator.description.edu_description}
 		{investigator.investigator.description.dex_description}
-	</p>
-{:catch error}
-	<p style="color: red">{error.message}</p>
+	</div>
+</Hidden>
 {/await}
 
