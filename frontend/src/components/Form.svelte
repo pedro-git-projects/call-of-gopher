@@ -53,13 +53,13 @@
     <label for="occupation" class="form-label">Occupation</label>
 	<input bind:value="{occupation}" type="text" class="form-control" id="occupation" aria-describedby="occupation">
   </div>
-  <button href="#Hidden" on:click="{handleClick}" type="button" class="btn btn-primary" data-toggle="collapse">Create</button>
+  <button on:click="{handleClick}" type="button" class="btn btn-primary" data-toggle="collapse">Create</button>
 </form>
 
 {#await promise}
 	<p>...waiting</p>
 {:then investigator}
-	<div id="Hidden" class="collapse">
+	<div>
 		Name: {investigator.investigator.name}
 		Age: {investigator.investigator.age}
 		Residence: {investigator.investigator.residence}
